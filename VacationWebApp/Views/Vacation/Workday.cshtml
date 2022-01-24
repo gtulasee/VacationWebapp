@@ -1,0 +1,53 @@
+﻿@model  VacationWebApp.Models.WorkDayModel
+@using Vacation.Domain
+
+@{
+    ViewBag.Title = "WorkDay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("CalculateAccLeaves", "Vacation", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2>Vacation Manager</h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmployeeId, "", htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        @Html.LabelFor(model => model.WorkDays, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.WorkDays, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WorkDays, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit"  value="Calculate" class="btn btn-primary" />
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10 text-success">
+            @ViewBag.Message
+        </div>
+
+    </div>
+    <div class="form-group">
+        @{
+            Html.RenderPartial("../_EmployeesList");
+        }
+        
+  
+    </div>
+    
+</div>
+    }
+
+  

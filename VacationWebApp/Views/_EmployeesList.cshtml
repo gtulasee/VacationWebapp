@@ -1,0 +1,56 @@
+﻿@model IList<Vacation.Domain.Interfaces.IEmployee>
+
+<div class="form-horizontal">
+
+    <div class="row" />
+    <table class="table table-bordered table-responsive table-condensed">
+        <thead>
+            <tr class="btn-primary">
+                <th>EmployeeId</th>
+                <th>Employee Name</th>
+                <th>Employee Type</th>
+                <th>Accumulated Leaves Days</th>
+                <th>Availed Leaves</th>
+                <th>Leave Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Vacation.Domain.Interfaces.IEmployee item in Model ?? ViewBag.Employees)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccumulatedLeaves)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AvailedVacationDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveBalances)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="col-md-4">
+        @{
+            if (ViewBag.Title != "VacationDay")
+            {
+                    @Html.ActionLink("Update Vacation", "UpdateVacationDays", "Vacation")
+            }
+            if (ViewBag.Title != "WorkDay")
+            {
+                @Html.ActionLink("Accumulate Work days", "CalculateAccLeaves", "Vacation")
+            }
+        }
+    </div>
+</div>
